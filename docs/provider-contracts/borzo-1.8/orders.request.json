@@ -1,0 +1,12 @@
+{
+  "method": "GET",
+  "path": "/orders",
+  "query": {
+    "order_id": 1250032,
+    "offset": 0,
+    "count": 1
+  },
+  "headers": {
+    "X-DV-Auth-Token": "<BORZO_AUTH_TOKEN>"
+  }
+}

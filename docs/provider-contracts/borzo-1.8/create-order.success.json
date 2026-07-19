@@ -1,0 +1,103 @@
+{
+  "is_successful": true,
+  "order": {
+    "order_id": 1250032,
+    "type": "standard",
+    "matter": "Rental equipment",
+    "order_name": "50032",
+    "vehicle_type_id": 8,
+    "created_datetime": "2026-07-18T15:18:39+05:30",
+    "finish_datetime": null,
+    "status": "available",
+    "status_description": "available",
+    "total_weight_kg": 12,
+    "is_client_notification_enabled": false,
+    "is_contact_person_notification_enabled": false,
+    "loaders_count": 0,
+    "points": [
+      {
+        "address": "Synthetic Warehouse, Mumbai",
+        "contact_person": {
+          "phone": "910000000000",
+          "name": "Synthetic Dispatch"
+        },
+        "latitude": "19.0000000",
+        "longitude": "72.8000000",
+        "required_start_datetime": "2026-07-20T10:00:00+05:30",
+        "required_finish_datetime": "2026-07-20T10:30:00+05:30",
+        "taking_amount": "0.00",
+        "buyout_amount": "0.00",
+        "note": "Synthetic pickup",
+        "is_order_payment_here": false,
+        "is_cod_cash_voucher_required": false,
+        "packages": [],
+        "point_id": 202685,
+        "delivery_id": null,
+        "client_order_id": null,
+        "arrival_start_datetime": null,
+        "arrival_finish_datetime": null,
+        "courier_visit_datetime": null,
+        "is_return_point": false,
+        "tracking_url": null,
+        "delivery": null
+      },
+      {
+        "address": "Synthetic Customer, Mumbai",
+        "contact_person": {
+          "phone": "910000000001",
+          "name": "Synthetic Recipient"
+        },
+        "client_order_id": "rntout0001",
+        "latitude": "19.1000000",
+        "longitude": "72.9000000",
+        "required_start_datetime": "2026-07-20T11:00:00+05:30",
+        "required_finish_datetime": "2026-07-20T12:00:00+05:30",
+        "taking_amount": "0.00",
+        "buyout_amount": "0.00",
+        "note": "Synthetic drop-off",
+        "is_order_payment_here": false,
+        "is_cod_cash_voucher_required": false,
+        "packages": [
+          {
+            "ware_code": "SYN-001",
+            "description": "Sanitized rental equipment",
+            "items_count": 1,
+            "item_payment_amount": "0.00",
+            "nomenclature_code": "SYNTHETIC"
+          }
+        ],
+        "point_id": 202686,
+        "delivery_id": 11712,
+        "arrival_start_datetime": null,
+        "arrival_finish_datetime": null,
+        "courier_visit_datetime": null,
+        "is_return_point": false,
+        "tracking_url": "https://tracking.example.invalid/synthetic-order",
+        "delivery": {
+          "status": "planned"
+        }
+      }
+    ],
+    "payment_amount": "234.50",
+    "delivery_fee_amount": "210.00",
+    "weight_fee_amount": "24.50",
+    "insurance_amount": "25000.00",
+    "insurance_fee_amount": "0.00",
+    "loading_fee_amount": "0.00",
+    "money_transfer_fee_amount": "0.00",
+    "promo_code_discount_amount": "0.00",
+    "cod_fee_amount": "0.00",
+    "return_fee_amount": "0.00",
+    "waiting_fee_amount": "0.00",
+    "backpayment_details": null,
+    "backpayment_photo_url": null,
+    "waybill_document_url": null,
+    "courier": null,
+    "is_motobox_required": false,
+    "is_thermobox_required": false,
+    "payment_method": "balance",
+    "bank_card_id": null,
+    "applied_promo_code": null,
+    "is_return_required": false
+  }
+}

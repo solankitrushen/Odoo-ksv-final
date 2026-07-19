@@ -1,0 +1,7 @@
+{
+  "is_successful": false,
+  "errors": [
+    "order_cannot_be_canceled"
+  ],
+  "parameter_errors": null
+}

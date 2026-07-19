@@ -1,0 +1,136 @@
+{
+  "manifestVersion": 2,
+  "provider": "msg91",
+  "contractVersion": "v5",
+  "status": "approved-for-implementation",
+  "retrievedAt": "2026-07-18",
+  "accountRegion": "IN",
+  "baseUrl": "https://control.msg91.com",
+  "hashAlgorithm": "sha256",
+  "sanitization": {
+    "secrets": "All credentials are replaced with angle-bracket placeholders.",
+    "identifiers": "Provider request IDs, template IDs, phone numbers, and message content are synthetic non-production values.",
+    "structuralChanges": false
+  },
+  "sourceDocuments": [
+    {
+      "name": "MSG91 Send SMS",
+      "url": "https://docs.msg91.com/sms/send-sms",
+      "retrievedAt": "2026-07-18"
+    },
+    {
+      "name": "MSG91 Send WhatsApp Template",
+      "url": "https://docs.msg91.com/whatsapp/template-bulk",
+      "retrievedAt": "2026-07-18"
+    },
+    {
+      "name": "MSG91 SendOTP",
+      "url": "https://docs.msg91.com/otp/sendotp",
+      "retrievedAt": "2026-07-18"
+    },
+    {
+      "name": "MSG91 Verify OTP",
+      "url": "https://docs.msg91.com/otp/verify-otp",
+      "retrievedAt": "2026-07-18"
+    },
+    {
+      "name": "MSG91 Resend OTP",
+      "url": "https://docs.msg91.com/otp/resend-otp",
+      "retrievedAt": "2026-07-18"
+    }
+  ],
+  "authFixture": {
+    "path": "auth-fields.json",
+    "sha256": "8ffed019a016d2aba537e4a1a40a3c19b09388698bf8116dd1175689affed820"
+  },
+  "operations": {
+    "smsFlowSend": {
+      "method": "POST",
+      "endpoint": "https://control.msg91.com/api/v5/flow",
+      "officialDocUrl": "https://docs.msg91.com/sms/send-sms",
+      "auth": {"location": "header", "field": "authkey"},
+      "requiredHeaders": {"accept": "application/json", "content-type": "application/json"},
+      "approvedTemplateIdEnv": "MSG91_SMS_FLOW_TEMPLATE_ID",
+      "approvedTemplateVariables": ["customer_name", "rental_number"],
+      "providerIdResponsePath": "$.message",
+      "strictSuccessObject": {"type": "success", "message": "non-empty-string"},
+      "fixtures": [
+        {"path": "sms-flow.request.json", "kind": "request", "sha256": "963d4bcaeabac6c877714497c8faab89254b3023194971d88603d71ae2869532"},
+        {"path": "sms-flow.success.json", "kind": "success", "httpStatus": 200, "sha256": "04437816e4f8e54bbda7f8fe0c84ea3c1e44b2ecb4e7e503d52c4e7e0faf36fb"},
+        {"path": "sms-flow.error.json", "kind": "error", "sha256": "ba40d6715f1902969abcd414a0329135e982de54de9a5747d16496ca33cdde24"}
+      ]
+    },
+    "whatsAppTransactionalTemplateSend": {
+      "method": "POST",
+      "endpoint": "https://control.msg91.com/api/v5/whatsapp/whatsapp-outbound-message/bulk/",
+      "officialDocUrl": "https://docs.msg91.com/whatsapp/template-bulk",
+      "auth": {"location": "header", "field": "authkey"},
+      "requiredHeaders": {"accept": "application/json", "content-type": "application/json"},
+      "approvedTemplateIdEnv": "MSG91_WHATSAPP_TEMPLATE_NAME",
+      "approvedTemplateVariables": ["body_1", "body_2"],
+      "providerIdResponsePath": "$.request_id",
+      "strictSuccessObject": {
+        "data": "non-empty-string",
+        "errors": null,
+        "status": "success",
+        "hasError": false,
+        "request_id": "non-empty-string"
+      },
+      "fixtures": [
+        {"path": "whatsapp-template.request.json", "kind": "request", "sha256": "4ff11696d11bec7db465396dc81061476172e4d88018536a5c2d5eabec40e069"},
+        {"path": "whatsapp-template.success.json", "kind": "success", "httpStatus": 200, "sha256": "098c15205c7d6feec8b87a0b292c2e7e268d21d8e1cac4e2fa02f76ba5f4d928"},
+        {"path": "whatsapp-template.error.json", "kind": "error", "httpStatus": 400, "sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"}
+      ]
+    },
+    "otpSend": {
+      "method": "POST",
+      "endpoint": "https://control.msg91.com/api/v5/otp",
+      "officialDocUrl": "https://docs.msg91.com/otp/sendotp",
+      "auth": {"location": "query", "field": "authkey"},
+      "requiredHeaders": {"content-type": "application/json"},
+      "approvedTemplateIdEnv": "MSG91_OTP_TEMPLATE_ID",
+      "providerIdResponsePath": "$.request_id",
+      "strictSuccessObject": {"type": "success", "request_id": "non-empty-string"},
+      "fixtures": [
+        {"path": "otp-send.request.json", "kind": "request", "sha256": "f5ac313ae1c4612190b15958d4e9bf0142b679ae585fec00bb383c480aebbdb7"},
+        {"path": "otp-send.success.json", "kind": "success", "httpStatus": 200, "sha256": "3d8862ec2d7415d62db42b019cf67234442a83f666823f78b703d28ee8aa207f"},
+        {"path": "otp-send.error.json", "kind": "error", "httpStatus": 401, "sha256": "5698dddd04ba566c65b939e78a0efa3881517c687c3a13b498be4a190c6b4e24"}
+      ]
+    },
+    "otpVerify": {
+      "method": "GET",
+      "endpoint": "https://control.msg91.com/api/v5/otp/verify",
+      "officialDocUrl": "https://docs.msg91.com/otp/verify-otp",
+      "auth": {"location": "header", "field": "authkey"},
+      "providerIdResponsePath": null,
+      "successMessageResponsePath": "$.message",
+      "strictSuccessObject": {"type": "success", "message": "OTP verified success"},
+      "fixtures": [
+        {"path": "otp-verify.request.json", "kind": "request", "sha256": "2f11277ce903221cf66cde4f39f9dd056877c51ff2f8490d73e1bac01e8b8388"},
+        {"path": "otp-verify.success.json", "kind": "success", "httpStatus": 200, "sha256": "3dec771a05f9008f9ca6016a7e2cb00faaa3561df0844431aa4d1d6db52f3160"},
+        {"path": "otp-verify.invalid.json", "kind": "error", "httpStatus": 200, "sha256": "61800eb82089f13fd38259bc2373ac2c86e2f1125bc5ddea29b4c9274f040b26"}
+      ]
+    },
+    "otpResend": {
+      "method": "GET",
+      "endpoint": "https://control.msg91.com/api/v5/otp/retry",
+      "officialDocUrl": "https://docs.msg91.com/otp/resend-otp",
+      "auth": {"location": "query", "field": "authkey"},
+      "allowedRetryTypes": ["text"],
+      "providerIdResponsePath": null,
+      "successMessageResponsePath": "$.message",
+      "strictSuccessObject": {"type": "success", "message": "retry send successfully"},
+      "fixtures": [
+        {"path": "otp-resend.request.json", "kind": "request", "sha256": "be330b98fa7dbb37204c0651080711f855d2e2b8c3cc811ea34703e0e94e1b24"},
+        {"path": "otp-resend.success.json", "kind": "success", "httpStatus": 200, "sha256": "650bf614563f669cd237062b4bad8f0a68cc45ad09919eaaa9142b558f8acd33"},
+        {"path": "otp-resend.error.json", "kind": "error", "httpStatus": 200, "sha256": "20c8c39b0dea83fd7cbdb65d89f548c31431fa5b31e57823f3563e16545ebe81"}
+      ]
+    }
+  },
+  "validation": {
+    "requiredOperationCount": 5,
+    "hashedArtifactCount": 16,
+    "jsonValidatedAt": "2026-07-18",
+    "officialLinksValidatedAt": "2026-07-18"
+  }
+}

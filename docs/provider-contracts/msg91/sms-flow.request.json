@@ -1,0 +1,20 @@
+{
+  "method": "POST",
+  "url": "https://control.msg91.com/api/v5/flow",
+  "headers": {
+    "accept": "application/json",
+    "authkey": "<MSG91_AUTH_KEY>",
+    "content-type": "application/json"
+  },
+  "body": {
+    "template_id": "<MSG91_SMS_FLOW_TEMPLATE_ID>",
+    "short_url": "0",
+    "recipients": [
+      {
+        "mobiles": "919876543210",
+        "customer_name": "Asha",
+        "rental_number": "RNT-000123"
+      }
+    ]
+  }
+}

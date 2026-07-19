@@ -1,0 +1,532 @@
+{
+  "manifestVersion": 1,
+  "provider": "razorpay",
+  "contractVersion": "payments-api-v1",
+  "status": "draft-pending-audit",
+  "retrievedAt": "2026-07-18",
+  "retrievalMethod": "HTTPS GET of official rendered documentation via documentation extractor; no live provider API/account call",
+  "baseUrl": "https://api.razorpay.com",
+  "hashAlgorithm": "sha256",
+  "manifestSelfHashPolicy": "manifest.json is the root of trust and is excluded from its own artifact list to avoid a recursive digest; release evidence records its SHA-256 separately",
+  "encoding": {
+    "json": "UTF-8, two-space indentation, final LF",
+    "money": "integer currency subunits; INR paise"
+  },
+  "auth": {
+    "scheme": "Basic",
+    "location": "Authorization header",
+    "encoding": "Basic SP + RFC4648 base64(UTF-8(key_id:key_secret))",
+    "secretReturnedToClient": false
+  },
+  "signatureEncoding": {
+    "checkout": {
+      "algorithm": "HMAC-SHA256",
+      "message": "server_order_id|razorpay_payment_id",
+      "messageEncoding": "UTF-8",
+      "digestEncoding": "lowercase hexadecimal"
+    },
+    "webhook": {
+      "algorithm": "HMAC-SHA256",
+      "message": "exact raw request bytes",
+      "messageEncoding": "raw bytes without parse/re-serialization",
+      "digestEncoding": "lowercase hexadecimal",
+      "header": "X-Razorpay-Signature",
+      "dedupeHeader": "x-razorpay-event-id"
+    }
+  },
+  "schemaPolicy": {
+    "version": 1,
+    "mode": "operation-specific allowlisted required fields; identity, amount, currency and state are strict; unknown success shapes fail closed"
+  },
+  "sanitization": {
+    "secrets": "Production credentials replaced; signature vectors use explicit test-only secrets.",
+    "identifiers": "All provider/account/customer IDs, receipts, notes, bank references and timestamps are synthetic.",
+    "pii": "Email uses example.invalid and phone is an obviously synthetic shape.",
+    "liveTraffic": false
+  },
+  "sourceDocuments": [
+    {
+      "name": "API Authentication",
+      "url": "https://razorpay.com/docs/api/authentication/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Create an Order",
+      "url": "https://razorpay.com/docs/api/orders/create/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Fetch a Payment With ID",
+      "url": "https://razorpay.com/docs/api/payments/fetch-with-id/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Standard Checkout and signature verification",
+      "url": "https://razorpay.com/docs/payments/payment-gateway/web-integration/standard/integration-steps/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Validate and Test Webhooks",
+      "url": "https://razorpay.com/docs/webhooks/validate-test/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Payments Webhook Events",
+      "url": "https://razorpay.com/docs/webhooks/payments/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Orders Webhook Events",
+      "url": "https://razorpay.com/docs/webhooks/orders/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Create a Normal Refund",
+      "url": "https://razorpay.com/docs/api/refunds/create-normal/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Refunds Webhook Events",
+      "url": "https://razorpay.com/docs/webhooks/refunds/",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    }
+  ],
+  "operations": {
+    "createOrder": {
+      "apiVersion": "v1",
+      "method": "POST",
+      "path": "/v1/orders",
+      "auth": "Basic header",
+      "officialSourceUrl": "https://razorpay.com/docs/api/orders/create/",
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "amount",
+          "currency",
+          "receipt",
+          "notes"
+        ],
+        "additionalProperties": false
+      },
+      "successSchema": {
+        "type": "object",
+        "required": [
+          "id",
+          "entity",
+          "amount",
+          "amount_paid",
+          "amount_due",
+          "currency",
+          "receipt",
+          "status",
+          "attempts",
+          "notes",
+          "created_at"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "error.code",
+          "error.description"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "order-create.request.json",
+          "kind": "request",
+          "sha256": "84e2471cb90a39233958c05e7f3537350e26eca2f5548152f4f166d93bf9b3d7"
+        },
+        {
+          "path": "order-create.success.json",
+          "kind": "success",
+          "sha256": "5254a57b3c1f6cc1eac81326678096fc3b73dc71c3d7b29cfe73194bd85cc52b"
+        },
+        {
+          "path": "order-create.error.json",
+          "kind": "error",
+          "sha256": "d2f3e541a58c2467b3133da14426ad80a0b45d4623bc026a6785edbcc89d9166"
+        }
+      ]
+    },
+    "fetchPayment": {
+      "apiVersion": "v1",
+      "method": "GET",
+      "path": "/v1/payments/:id",
+      "auth": "Basic header",
+      "officialSourceUrl": "https://razorpay.com/docs/api/payments/fetch-with-id/",
+      "requestSchema": {
+        "pathParameter": "id"
+      },
+      "successSchema": {
+        "required": [
+          "id",
+          "entity",
+          "amount",
+          "currency",
+          "status",
+          "order_id",
+          "captured"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "error.code",
+          "error.description"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "payment-fetch.request.json",
+          "kind": "request",
+          "sha256": "2f7bf3955c925d11476d5568c0ed15c99da5e5bee9d4f0025f38c5b374bd1fa3"
+        },
+        {
+          "path": "payment-fetch.success.json",
+          "kind": "success",
+          "sha256": "2346ff2803834e4ba012c32b1baaf7612226da0066d12e51885f2aed60151b87"
+        },
+        {
+          "path": "payment-fetch.error.json",
+          "kind": "error",
+          "sha256": "be86a71851cd55de70baf130e878a063794772d365b00865508aa8d85e5ce347"
+        },
+        {
+          "path": "checkout-signature.context.json",
+          "kind": "signature-context",
+          "sha256": "e79ad719cae9077ff06180b0477ddc933d66bdd9f85e7a8b8e6af0ce8898d6ae"
+        }
+      ]
+    },
+    "paymentAndOrderWebhooks": {
+      "apiVersion": "webhook-current-at-retrieval",
+      "method": "POST",
+      "path": "<configured-rental-webhook-url>",
+      "auth": "X-Razorpay-Signature raw-body HMAC",
+      "officialSourceUrls": [
+        "https://razorpay.com/docs/webhooks/validate-test/",
+        "https://razorpay.com/docs/webhooks/payments/",
+        "https://razorpay.com/docs/webhooks/orders/"
+      ],
+      "schema": {
+        "required": [
+          "entity",
+          "account_id",
+          "event",
+          "contains",
+          "payload",
+          "created_at"
+        ],
+        "allowedEvents": [
+          "payment.authorized",
+          "payment.captured",
+          "payment.failed",
+          "order.paid"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "webhook-payment.authorized.json",
+          "kind": "webhook",
+          "sha256": "f919191ead3dc451cac3b518ba623c277ea015ca2c9285edec95d1862a060388"
+        },
+        {
+          "path": "webhook-payment.captured.json",
+          "kind": "webhook",
+          "sha256": "0e9c8f674a3a5145891a1c9f437f7c57cff12b51ee9768d7f548e4ef635f8533"
+        },
+        {
+          "path": "webhook-payment.failed.json",
+          "kind": "webhook",
+          "sha256": "221dc4e788481d902980870c568d68f3cf05fb63a4cab737469b673f97721b0c"
+        },
+        {
+          "path": "webhook-order.paid.json",
+          "kind": "webhook",
+          "sha256": "a748bdb6791c8c4f018e26ffdc4391dc4f20c2efb4433d8b2e558a736a3ce1b7"
+        },
+        {
+          "path": "signature-vectors.json",
+          "kind": "signature-vectors",
+          "sha256": "33629b6a19274fe590152c72be128b86587ee725e139149656f726d8c88aad29"
+        }
+      ]
+    },
+    "partialRefund": {
+      "apiVersion": "v1",
+      "method": "POST",
+      "path": "/v1/payments/:id/refund",
+      "auth": "Basic header",
+      "officialSourceUrl": "https://razorpay.com/docs/api/refunds/create-normal/",
+      "amountSemantics": "amount present and less than captured amount",
+      "requestSchema": {
+        "required": [
+          "amount"
+        ],
+        "amount": "positive integer currency subunits"
+      },
+      "successSchema": {
+        "required": [
+          "id",
+          "entity",
+          "amount",
+          "currency",
+          "payment_id",
+          "status",
+          "created_at"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "error.code",
+          "error.description"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "refund-partial.request.json",
+          "kind": "request",
+          "sha256": "b31415b2716550bf4a1e135a173480269ebf3acbcd6f0f2df8384f4258397f22"
+        },
+        {
+          "path": "refund-partial.success.json",
+          "kind": "success",
+          "sha256": "14a55fcf03c6fb767957e3c168f93b12bf6fc6451201a884924936cc23353725"
+        },
+        {
+          "path": "refund-partial.error.json",
+          "kind": "error",
+          "sha256": "d4a0942b114629d8523d289fcd0fbf1bfe07cf1854cc912e5cbb121a6537cb62"
+        }
+      ]
+    },
+    "fullRefund": {
+      "apiVersion": "v1",
+      "method": "POST",
+      "path": "/v1/payments/:id/refund",
+      "auth": "Basic header",
+      "officialSourceUrl": "https://razorpay.com/docs/api/refunds/create-normal/",
+      "amountSemantics": "amount omitted to refund the full captured remainder",
+      "requestSchema": {
+        "forbidden": [
+          "amount"
+        ]
+      },
+      "successSchema": {
+        "required": [
+          "id",
+          "entity",
+          "amount",
+          "currency",
+          "payment_id",
+          "status",
+          "created_at"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "error.code",
+          "error.description"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "refund-full.request.json",
+          "kind": "request",
+          "sha256": "2e96f23ea89052f72295d658a52786a345b434f9d1a86172c0415f40235cf08e"
+        },
+        {
+          "path": "refund-full.success.json",
+          "kind": "success",
+          "sha256": "07a63346b2ba52045219860b3765b8296c9e5cf730690b14bdeb6febcdaa4b1b"
+        },
+        {
+          "path": "refund-full.error.json",
+          "kind": "error",
+          "sha256": "a8a9ee4224fb033063db49697d45def20d1a6e478c495ff8dffd0a8cac77c78b"
+        }
+      ]
+    },
+    "refundWebhooks": {
+      "apiVersion": "webhook-current-at-retrieval",
+      "method": "POST",
+      "path": "<configured-rental-webhook-url>",
+      "auth": "X-Razorpay-Signature raw-body HMAC",
+      "officialSourceUrls": [
+        "https://razorpay.com/docs/webhooks/validate-test/",
+        "https://razorpay.com/docs/webhooks/refunds/"
+      ],
+      "schema": {
+        "required": [
+          "entity",
+          "account_id",
+          "event",
+          "contains",
+          "payload.refund",
+          "payload.payment",
+          "created_at"
+        ],
+        "allowedEvents": [
+          "refund.created",
+          "refund.processed",
+          "refund.failed"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "webhook-refund.created.json",
+          "kind": "webhook",
+          "sha256": "c86758f5d829dd5f60cf08b8c91a7a5783dc9518b5497b03faacf0654b218be5"
+        },
+        {
+          "path": "webhook-refund.processed.json",
+          "kind": "webhook",
+          "sha256": "5d5e73561aad15a62cf6b1e1a5066959921179bb06298edd4a2e7c8fa1351d29"
+        },
+        {
+          "path": "webhook-refund.failed.json",
+          "kind": "webhook",
+          "sha256": "b9b42dc3578c7261571af8338190cb83d29329ccdf5814fafc97226e5d7b6256"
+        },
+        {
+          "path": "signature-vectors.json",
+          "kind": "signature-vectors",
+          "sha256": "33629b6a19274fe590152c72be128b86587ee725e139149656f726d8c88aad29"
+        }
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "kind": "readme",
+      "sha256": "2970b78f8c6bf1ae6b35cedc778c1bb40bb7fbd4a0d2a2e9f40f6c5e64f8ef30"
+    },
+    {
+      "path": "auth-context.json",
+      "kind": "auth",
+      "sha256": "91428ea9063cbe120b910cc552608bd386fdd7eb1d7359174575f8f9bc565a97"
+    },
+    {
+      "path": "checkout-signature.context.json",
+      "kind": "signature-context",
+      "sha256": "e79ad719cae9077ff06180b0477ddc933d66bdd9f85e7a8b8e6af0ce8898d6ae"
+    },
+    {
+      "path": "order-create.error.json",
+      "kind": "error",
+      "sha256": "d2f3e541a58c2467b3133da14426ad80a0b45d4623bc026a6785edbcc89d9166"
+    },
+    {
+      "path": "order-create.request.json",
+      "kind": "request",
+      "sha256": "84e2471cb90a39233958c05e7f3537350e26eca2f5548152f4f166d93bf9b3d7"
+    },
+    {
+      "path": "order-create.success.json",
+      "kind": "success",
+      "sha256": "5254a57b3c1f6cc1eac81326678096fc3b73dc71c3d7b29cfe73194bd85cc52b"
+    },
+    {
+      "path": "payment-fetch.error.json",
+      "kind": "error",
+      "sha256": "be86a71851cd55de70baf130e878a063794772d365b00865508aa8d85e5ce347"
+    },
+    {
+      "path": "payment-fetch.request.json",
+      "kind": "request",
+      "sha256": "2f7bf3955c925d11476d5568c0ed15c99da5e5bee9d4f0025f38c5b374bd1fa3"
+    },
+    {
+      "path": "payment-fetch.success.json",
+      "kind": "success",
+      "sha256": "2346ff2803834e4ba012c32b1baaf7612226da0066d12e51885f2aed60151b87"
+    },
+    {
+      "path": "refund-full.error.json",
+      "kind": "error",
+      "sha256": "a8a9ee4224fb033063db49697d45def20d1a6e478c495ff8dffd0a8cac77c78b"
+    },
+    {
+      "path": "refund-full.request.json",
+      "kind": "request",
+      "sha256": "2e96f23ea89052f72295d658a52786a345b434f9d1a86172c0415f40235cf08e"
+    },
+    {
+      "path": "refund-full.success.json",
+      "kind": "success",
+      "sha256": "07a63346b2ba52045219860b3765b8296c9e5cf730690b14bdeb6febcdaa4b1b"
+    },
+    {
+      "path": "refund-partial.error.json",
+      "kind": "error",
+      "sha256": "d4a0942b114629d8523d289fcd0fbf1bfe07cf1854cc912e5cbb121a6537cb62"
+    },
+    {
+      "path": "refund-partial.request.json",
+      "kind": "request",
+      "sha256": "b31415b2716550bf4a1e135a173480269ebf3acbcd6f0f2df8384f4258397f22"
+    },
+    {
+      "path": "refund-partial.success.json",
+      "kind": "success",
+      "sha256": "14a55fcf03c6fb767957e3c168f93b12bf6fc6451201a884924936cc23353725"
+    },
+    {
+      "path": "signature-vectors.json",
+      "kind": "signature-vectors",
+      "sha256": "33629b6a19274fe590152c72be128b86587ee725e139149656f726d8c88aad29"
+    },
+    {
+      "path": "webhook-order.paid.json",
+      "kind": "webhook",
+      "sha256": "a748bdb6791c8c4f018e26ffdc4391dc4f20c2efb4433d8b2e558a736a3ce1b7"
+    },
+    {
+      "path": "webhook-payment.authorized.json",
+      "kind": "webhook",
+      "sha256": "f919191ead3dc451cac3b518ba623c277ea015ca2c9285edec95d1862a060388"
+    },
+    {
+      "path": "webhook-payment.captured.json",
+      "kind": "webhook",
+      "sha256": "0e9c8f674a3a5145891a1c9f437f7c57cff12b51ee9768d7f548e4ef635f8533"
+    },
+    {
+      "path": "webhook-payment.failed.json",
+      "kind": "webhook",
+      "sha256": "221dc4e788481d902980870c568d68f3cf05fb63a4cab737469b673f97721b0c"
+    },
+    {
+      "path": "webhook-refund.created.json",
+      "kind": "webhook",
+      "sha256": "c86758f5d829dd5f60cf08b8c91a7a5783dc9518b5497b03faacf0654b218be5"
+    },
+    {
+      "path": "webhook-refund.failed.json",
+      "kind": "webhook",
+      "sha256": "b9b42dc3578c7261571af8338190cb83d29329ccdf5814fafc97226e5d7b6256"
+    },
+    {
+      "path": "webhook-refund.processed.json",
+      "kind": "webhook",
+      "sha256": "5d5e73561aad15a62cf6b1e1a5066959921179bb06298edd4a2e7c8fa1351d29"
+    }
+  ],
+  "validation": {
+    "requiredOperationCount": 6,
+    "hashedArtifactCount": 23,
+    "jsonValidatedAt": "2026-07-18",
+    "hashesValidatedAt": "2026-07-18",
+    "signatureVectorsValidatedAt": "2026-07-18",
+    "officialLinksRetrievedAt": "2026-07-18"
+  }
+}

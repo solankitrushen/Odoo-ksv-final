@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "BAD_REQUEST_ERROR",
+    "description": "The id provided does not exist.",
+    "source": "business",
+    "step": "payment_fetch",
+    "reason": "invalid_payment_id",
+    "metadata": {
+      "payment_id": "pay_test_missing"
+    }
+  }
+}

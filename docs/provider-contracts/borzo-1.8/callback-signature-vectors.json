@@ -1,0 +1,19 @@
+{
+  "algorithm": "HMAC-SHA256",
+  "messageEncoding": "exact file bytes including final LF",
+  "signatureEncoding": "lowercase hexadecimal",
+  "header": "X-DV-Signature",
+  "testSecret": "test_borzo_callback_secret_not_for_production_2026",
+  "vectors": [
+    {
+      "path": "callback-order.json",
+      "bodySha256": "4419424044d2733395e3b762c665eae03f14f737b999bc151b60802945806e65",
+      "expectedSignature": "49e40fb0d39acb05a91287e9d413ebb1639027b56699c3f8e0f22eef074a40ca"
+    },
+    {
+      "path": "callback-delivery.json",
+      "bodySha256": "f0b8df8485a00f4e87c208e4284ebf9fdb6e0a40d294a5945285d480dfc4fbbb",
+      "expectedSignature": "f0ad8b2da34b7ff513b2ee5f2cd0df6168b0a75fcaf88e04c1d9ddd6c8209d88"
+    }
+  ]
+}

@@ -1,0 +1,785 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light: clean paper surfaces; muted text dark enough for table headers (AA). */
+    --background: 0 0% 98%;
+    --foreground: 0 0% 9%;
+    --panel: 0 0% 100%;
+    --panel-foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 9%;
+    --border: 0 0% 84%;
+    --input: 0 0% 84%;
+    --ring: 0 0% 9%;
+    --destructive: 0 72% 46%;
+    --radius: 0.5rem;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 9%;
+    --destructive-foreground: 0 0% 100%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  /* Auth pages (login, signup, onboarding) always use light theme */
+  .auth-light,
+  .auth-light .dark {
+    --background: 0 0% 98%;
+    --foreground: 0 0% 9%;
+    --panel: 0 0% 100%;
+    --panel-foreground: 0 0% 9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --muted: 0 0% 94%;
+    --muted-foreground: 0 0% 32%;
+    --accent: 0 0% 94%;
+    --accent-foreground: 0 0% 9%;
+    --border: 0 0% 84%;
+    --input: 0 0% 84%;
+    --ring: 0 0% 9%;
+    --destructive: 0 72% 46%;
+    --secondary: 0 0% 94%;
+    --secondary-foreground: 0 0% 9%;
+    --destructive-foreground: 0 0% 100%;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --panel: 0 0% 11%;
+    --panel-foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 70%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --border: 0 0% 22%;
+    --input: 0 0% 22%;
+    --ring: 0 0% 83.1%;
+    /* Solid red that stays readable as fill + white label in dark menus. */
+    --destructive: 0 72% 48%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+:root {
+  --bg-hex: #f4f4f5;
+  --sidebar-hex: #fafafa;
+  --panel-hex: #ffffff;
+  --header-hex: #fafafa;
+}
+.dark {
+  --bg-hex: #0a0a0a;
+  --sidebar-hex: #1c1c1c;
+  --panel-hex: #1c1c1c;
+  --header-hex: #1a1a1a;
+}
+
+/* react-day-picker (Calendar / DatePicker) – theme alignment */
+:root {
+  --rdp-accent-color: hsl(var(--primary));
+  --rdp-accent-background-color: hsl(var(--accent));
+}
+.dark {
+  --rdp-accent-color: hsl(var(--primary));
+  --rdp-accent-background-color: hsl(var(--accent));
+}
+
+/* Content editor: Lora for readability (SEO content) */
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&display=swap");
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: var(--bg-hex);
+    color: hsl(var(--foreground));
+  }
+}
+
+/* ================================
+   QUILL RICH TEXT EDITOR – structure, spacing, width, dark theme
+   Header: white in dark / black in light. Body #1c1c1c. Ultra-thin neutral-400 border.
+   ================================ */
+/* Wrapper: ultra-thin neutral-400 gray border */
+.osmo-quill-editor {
+  border: 1px solid #a3a3a3;
+}
+.dark .osmo-quill-editor {
+  border-color: #525252;
+}
+
+.osmo-quill-editor .ql-toolbar.ql-snow {
+  border: none;
+  padding: 0;
+  background: transparent;
+  min-height: 44px;
+}
+/* Toolbar: breathing space – top/bottom 12px, sides 14px */
+.osmo-quill-editor .ql-toolbar {
+  padding: 12px 14px;
+  background: rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid hsl(var(--border));
+}
+.dark .osmo-quill-editor .ql-toolbar {
+  background: #262626;
+  border-bottom-color: #2a2a2a;
+}
+/* Header/toolbar: black in light theme */
+.osmo-quill-editor .ql-snow .ql-stroke {
+  stroke: hsl(var(--foreground) / 0.4);
+}
+.osmo-quill-editor .ql-snow .ql-fill,
+.osmo-quill-editor .ql-snow .ql-picker,
+.osmo-quill-editor .ql-snow .ql-toolbar button {
+  color: hsl(var(--foreground));
+}
+.osmo-quill-editor .ql-snow .ql-toolbar button:hover .ql-stroke,
+.osmo-quill-editor .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.osmo-quill-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke {
+  stroke: hsl(var(--foreground));
+}
+.osmo-quill-editor .ql-snow .ql-toolbar button:hover .ql-fill,
+.osmo-quill-editor .ql-snow .ql-toolbar button.ql-active .ql-fill,
+.osmo-quill-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill {
+  fill: hsl(var(--foreground));
+}
+/* Header/toolbar: white in dark theme when active/hover */
+.dark .osmo-quill-editor .ql-snow .ql-stroke {
+  stroke: rgba(250, 250, 250, 0.5);
+}
+.dark .osmo-quill-editor .ql-snow .ql-fill,
+.dark .osmo-quill-editor .ql-snow .ql-picker,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar .ql-picker-label {
+  color: #fafafa;
+}
+.dark .osmo-quill-editor .ql-snow .ql-toolbar button:hover .ql-stroke,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar button.ql-active .ql-stroke,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar .ql-picker.ql-expanded .ql-picker-label .ql-stroke {
+  stroke: #fafafa;
+}
+.dark .osmo-quill-editor .ql-snow .ql-toolbar button:hover .ql-fill,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar button.ql-active .ql-fill,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill,
+.dark .osmo-quill-editor .ql-snow .ql-toolbar .ql-picker.ql-expanded .ql-picker-label .ql-fill {
+  fill: #fafafa;
+}
+
+/* Shadcn-style heading dropdown: rounded, shadow, padding, theme-aware */
+.osmo-quill-editor .ql-snow .ql-picker.ql-header {
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+.osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-label {
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+.osmo-quill-editor .ql-snow .ql-picker.ql-header:hover .ql-picker-label,
+.osmo-quill-editor .ql-snow .ql-picker.ql-header.ql-expanded .ql-picker-label {
+  background: hsl(var(--accent));
+}
+.dark .osmo-quill-editor .ql-snow .ql-picker.ql-header:hover .ql-picker-label,
+.dark .osmo-quill-editor .ql-snow .ql-picker.ql-header.ql-expanded .ql-picker-label {
+  background: #2a2a2a;
+}
+.osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-options {
+  border-radius: 6px;
+  padding: 4px;
+  margin-top: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid hsl(var(--border));
+  background: white;
+}
+.dark .osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-options {
+  background: #1c1c1c;
+  border-color: #2a2a2a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+.osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-item {
+  padding: 8px 10px;
+  border-radius: 4px;
+  color: hsl(var(--foreground));
+}
+.dark .osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-item {
+  color: #fafafa;
+}
+.osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-item:hover {
+  background: hsl(var(--accent));
+}
+.dark .osmo-quill-editor .ql-snow .ql-picker.ql-header .ql-picker-item:hover {
+  background: #252525;
+}
+
+.osmo-quill-editor .ql-container.ql-snow {
+  border: none;
+  font-family: "Lora", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+}
+.osmo-quill-editor .ql-container {
+  background: #fafafa;
+}
+.dark .osmo-quill-editor .ql-container {
+  background: #1c1c1c;
+}
+.osmo-quill-editor .ql-editor {
+  min-height: 500px;
+  padding: 1.5rem 1.5rem 2rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.osmo-quill-editor .ql-editor.ql-blank::before {
+  color: hsl(var(--muted-foreground));
+  font-style: normal;
+}
+.osmo-quill-editor .ql-editor {
+  color: hsl(var(--foreground));
+}
+.dark .osmo-quill-editor .ql-editor {
+  color: #fafafa;
+}
+
+/* TipTap editor (replaces Quill in DOM; same wrapper class for layout) */
+.osmo-quill-editor .tiptap {
+  min-height: 500px;
+  padding: 1.5rem 1.5rem 2rem;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Lora", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.75;
+  color: hsl(var(--foreground));
+}
+.dark .osmo-quill-editor .tiptap {
+  color: #fafafa;
+}
+.osmo-quill-editor .tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  float: left;
+  color: hsl(var(--muted-foreground));
+  pointer-events: none;
+  height: 0;
+}
+.dark .osmo-quill-editor .tiptap p.is-editor-empty:first-child::before {
+  color: #737373;
+}
+
+/* ================================
+   SONNER TOAST – single toast, theme-aware
+   Light: white bg + thin border. Dark: #1c1c1c
+   Close button on the right, visible in both themes
+   ================================ */
+.osmo-toaster [data-sonner-toast],
+.osmo-toaster .osmo-toast {
+  background: #ffffff !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+}
+.dark .osmo-toaster [data-sonner-toast],
+.dark .osmo-toaster .osmo-toast {
+  background: #1c1c1c !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: #fafafa !important;
+}
+
+/* Close (cancel) button: right corner, icon always visible in light and dark */
+.osmo-toaster [data-sonner-toast] {
+  --toast-close-button-start: auto;
+  --toast-close-button-end: 8px;
+  padding-right: 36px !important; /* space for close button on the right */
+}
+.osmo-toaster [data-sonner-toast] [data-close-button] {
+  left: auto !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  width: 24px !important;
+  height: 24px !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+  border: 1px solid hsl(var(--border)) !important;
+  color: hsl(var(--foreground)) !important;
+  opacity: 1 !important;
+}
+.osmo-toaster [data-sonner-toast] [data-close-button]:hover {
+  background: rgba(0, 0, 0, 0.15) !important;
+}
+/* Ensure close (X) icon is visible – Sonner uses fill */
+.osmo-toaster [data-sonner-toast] [data-close-button] svg,
+.osmo-toaster [data-sonner-toast] [data-close-button] path {
+  color: inherit !important;
+  fill: currentColor !important;
+  opacity: 1 !important;
+}
+.dark .osmo-toaster [data-sonner-toast] [data-close-button] {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+  color: #fafafa !important;
+}
+.dark .osmo-toaster [data-sonner-toast] [data-close-button]:hover {
+  background: rgba(255, 255, 255, 0.22) !important;
+}
+.dark .osmo-toaster [data-sonner-toast] [data-close-button] svg,
+.dark .osmo-toaster [data-sonner-toast] [data-close-button] path {
+  color: #fafafa !important;
+  fill: #fafafa !important;
+}
+
+/* ================================
+   RADIX TOOLTIP – FINAL HARD FIX
+   ================================ */
+
+/* Light mode */
+:root {
+  --tooltip-bg: 0 0% 100%;
+  --tooltip-fg: 0 0% 9%;
+}
+
+/* Dark mode */
+.dark {
+  --tooltip-bg: 0 0% 11%;
+  --tooltip-fg: 0 0% 98%;
+}
+
+/*
+  IMPORTANT:
+  The visible tooltip div does NOT have
+  data-radix-tooltip-content.
+  It relies on Tailwind's bg-popover utility.
+  So we override the variables at the container level.
+*/
+.z-50[style*="radix-popper"],
+.z-50:has([role="tooltip"]) {
+  background-color: var(--panel-hex);
+
+}
+
+/* Ensure border + text always match */
+.z-50[style*="radix-popper"] {
+  border-color: hsl(var(--border)) !important;
+  color: hsl(var(--popover-foreground)) !important;
+}
+
+/* Optional: premium elevation */
+.z-50[style*="radix-popper"] {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+}
+.dark .z-50[style*="radix-popper"] {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
+}
+
+.bg-panel {
+  background-color: var(--panel-hex);
+}
+
+.bg-sidebar {
+  background-color: var(--sidebar-hex);
+}
+
+/* FullCalendar – override injected .fc .fc-button-primary (from node_modules/@fullcalendar/core/internal-common.js) */
+.custom-calendar,
+.custom-calendar .fc {
+  --fc-button-bg-color: transparent;
+  --fc-button-border-color: #000;
+  --fc-button-text-color: #000;
+  --fc-button-hover-bg-color: transparent;
+  --fc-button-hover-border-color: #000;
+  --fc-button-active-bg-color: transparent;
+  --fc-button-active-border-color: #000;
+}
+.dark .custom-calendar,
+.dark .custom-calendar .fc {
+  --fc-button-bg-color: transparent;
+  --fc-button-border-color: #525252;
+  --fc-button-text-color: #e5e5e5;
+  --fc-button-hover-bg-color: transparent;
+  --fc-button-hover-border-color: #737373;
+  --fc-button-active-bg-color: transparent;
+  --fc-button-active-border-color: #525252;
+}
+
+/* FullCalendar – theme aligned with dashboard; no internal scroll */
+.fc .fc-view-harness {
+  @apply max-w-full;
+  overflow: visible;
+}
+.fc .fc-view-harness > .fc-scrollgrid {
+  overflow: visible;
+}
+
+.fc-dayGridMonth-view.fc-view.fc-daygrid {
+  @apply min-w-[718px];
+}
+
+.fc .fc-scrollgrid-section > * {
+  border-right-width: 0;
+  border-bottom-width: 0;
+}
+
+.fc .fc-scrollgrid {
+  border-left-width: 0;
+}
+
+/* Calendar grid: transparent so page background shows through */
+.fc .fc-scrollgrid-liquid,
+.fc .fc-scrollgrid-section-body table,
+.fc .fc-daygrid-body,
+.fc .fc-daygrid-day-frame {
+  background-color: hsl(var(--card));
+}
+.dark .fc .fc-scrollgrid-liquid,
+.dark .fc .fc-scrollgrid-section-body table,
+.dark .fc .fc-daygrid-body,
+.dark .fc .fc-daygrid-day-frame {
+  background-color: transparent;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  @apply flex flex-col gap-4 px-6 pt-6 sm:flex-row sm:gap-6;
+}
+
+.fc-button-group {
+  @apply gap-2;
+}
+
+.fc-button-group .fc-button {
+  @apply flex h-9 w-9 sm:h-10 sm:w-10 items-center justify-center rounded-lg border border-border bg-transparent hover:bg-muted focus:shadow-none active:shadow-none text-foreground;
+}
+/* Prev/next arrows: visible in light and dark */
+.fc-button-group .fc-button .fc-icon {
+  @apply inline-block;
+  color: inherit;
+}
+.fc-button-group .fc-button .fc-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+.dark .fc-button-group .fc-button {
+  color: #e5e5e5;
+  border-color: #404040;
+}
+.dark .fc-button-group .fc-button:hover {
+  color: #fafafa;
+  background-color: #262626;
+}
+
+.fc-addEventButton-button {
+  @apply rounded-lg border border-border px-4 py-2.5 text-sm font-medium text-foreground hover:bg-muted focus:shadow-none;
+  background-color: hsl(var(--muted));
+}
+.dark .fc-addEventButton-button {
+  @apply border-[#404040] text-[#fafafa] hover:bg-white/10;
+  background-color: transparent;
+}
+.dark .fc-addEventButton-button:hover {
+  @apply bg-white/10 text-[#fafafa];
+}
+
+.fc-toolbar-title {
+  @apply text-lg font-medium text-foreground;
+}
+.dark .fc-toolbar-title {
+  @apply text-[#fafafa];
+}
+
+/* View switcher (month/week/day): no container bg, match UI */
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child {
+  @apply rounded-lg p-0.5 gap-1 bg-transparent;
+}
+.dark .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child {
+  background-color: transparent;
+}
+
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button {
+  @apply h-auto w-auto rounded-lg border border-border bg-transparent px-2 py-1.5 text-xs font-medium text-muted-foreground focus:shadow-none sm:px-3 sm:py-2 sm:text-sm;
+}
+.dark .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button {
+  @apply border-[#404040] text-[#a3a3a3];
+}
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button:hover {
+  @apply text-foreground bg-muted/50;
+}
+.dark .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button:hover {
+  @apply text-[#fafafa] bg-white/10;
+}
+
+.fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button.fc-button-active {
+  @apply text-foreground bg-muted border-border;
+}
+.dark .fc-header-toolbar.fc-toolbar .fc-toolbar-chunk:last-child .fc-button.fc-button-active {
+  @apply bg-white/10 border-[#404040] text-[#fafafa];
+}
+
+.fc-theme-standard th {
+  @apply border-x-0 border-t text-left;
+  border-color: hsl(var(--border));
+  background-color: hsl(var(--muted));
+}
+.dark .fc-theme-standard th {
+  border-color: #2a2a2a;
+  background-color: #262626;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard .fc-scrollgrid {
+  @apply border-border;
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply px-5 py-4 text-sm font-medium uppercase text-muted-foreground;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: hsl(var(--card));
+}
+.dark .fc .fc-daygrid-day.fc-day-today {
+  background-color: transparent;
+}
+
+.fc .fc-daygrid-day {
+  @apply p-2;
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-scrollgrid-sync-inner {
+  @apply rounded-sm;
+  background-color: hsl(var(--muted));
+}
+.dark .fc .fc-daygrid-day.fc-day-today .fc-scrollgrid-sync-inner {
+  background-color: #262626;
+}
+
+.fc .fc-daygrid-day-number {
+  @apply p-3 text-sm font-medium text-foreground;
+}
+
+.fc .fc-day-other .fc-daygrid-day-top .fc-daygrid-day-number {
+  @apply text-muted-foreground;
+}
+
+.event-fc-color {
+  @apply rounded-md py-1 pl-2 pr-1.5 min-w-0 max-w-full flex flex-1 items-center gap-1.5 border;
+  background-color: hsl(var(--card)); /* light mode = white */
+  font-size: clamp(0.6rem, 1vw + 0.45rem, 0.75rem);
+}
+
+.dark .event-fc-color {
+  background-color: #1f1f1f; /* dark chip */
+  border-color: #404040;
+}
+
+.event-fc-color .fc-event-title {
+  @apply p-0 font-normal text-foreground truncate min-w-0;
+  font-size: inherit;
+}
+.event-fc-color .fc-event-time {
+  @apply shrink-0 text-[0.6rem] opacity-80;
+}
+
+.fc-daygrid-event-dot {
+  @apply shrink-0 h-4 w-0.5 rounded-full mr-1.5 border-none;
+}
+
+.fc-event {
+  @apply focus:shadow-none;
+}
+
+.fc-daygrid-event.fc-event-start {
+  @apply ml-1.5;
+}
+
+/* Semantic chip colors – no blue */
+.event-fc-color.fc-bg-primary {
+  background-color: hsl(var(--card));
+  border-color: hsl(var(--border));
+}
+
+
+
+.dark .event-fc-color.fc-bg-primary {
+  background-color: #262626;
+  border-color: #404040;
+}
+
+
+.event-fc-color.fc-bg-success {
+  @apply bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-900/50;
+}
+
+.event-fc-color.fc-bg-danger {
+  @apply bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-900/50;
+}
+
+.event-fc-color.fc-bg-warning {
+  @apply bg-yellow-50 border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-900/50;
+}
+
+.event-fc-color.fc-bg-success .fc-daygrid-event-dot {
+  @apply bg-green-600 dark:bg-green-500;
+}
+
+.event-fc-color.fc-bg-danger .fc-daygrid-event-dot {
+  @apply bg-red-600 dark:bg-red-500;
+}
+
+.event-fc-color.fc-bg-primary .fc-daygrid-event-dot {
+  @apply bg-primary;
+}
+
+.event-fc-color.fc-bg-warning .fc-daygrid-event-dot {
+  @apply bg-yellow-600 dark:bg-yellow-500;
+}
+
+.fc-direction-ltr .fc-timegrid-slot-label-frame {
+  @apply px-3 py-1.5 text-left text-sm font-medium text-muted-foreground;
+}
+
+.fc .fc-timegrid-axis-cushion {
+  @apply text-sm font-medium text-muted-foreground;
+}
+
+/* Kill FullCalendar's default blue – only our chip styles apply */
+.custom-calendar .fc-h-event,
+.custom-calendar .fc-event,
+.custom-calendar .fc-event-main {
+  background: transparent !important;
+  border: none !important;
+}
+.custom-calendar .fc-h-event .fc-event-main {
+  background: transparent !important;
+}
+
+/* Z-index and stacking: events sit above cell background, hover/focus on top */
+.fc .fc-daygrid-day-frame {
+  position: relative;
+  z-index: 0;
+}
+
+.fc .fc-daygrid-day-events {
+  position: relative;
+  z-index: 1;
+  margin-top: 2px;
+  min-height: 0;
+}
+
+.fc .fc-daygrid-event-harness {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 6px;
+}
+
+.fc .fc-daygrid-event-harness:last-child {
+  margin-bottom: 0;
+}
+
+.fc .fc-event {
+  position: relative;
+  z-index: 1;
+}
+
+.fc .fc-event:hover,
+.fc .fc-event:focus-within {
+  z-index: 2;
+}
+
+/* Event chip hover: visible highlight when hovering */
+.fc .fc-event:hover .event-fc-color,
+.fc .fc-event:focus-within .event-fc-color {
+  @apply bg-muted/80 dark:bg-white/10;
+}
+.event-fc-color.fc-bg-primary:hover,
+.fc .fc-event:hover .event-fc-color.fc-bg-primary {
+  @apply bg-muted dark:bg-white/10;
+}
+.event-fc-color.fc-bg-success:hover,
+.fc .fc-event:hover .event-fc-color.fc-bg-success {
+  @apply bg-green-100 dark:bg-green-900/30;
+}
+.event-fc-color.fc-bg-danger:hover,
+.fc .fc-event:hover .event-fc-color.fc-bg-danger {
+  @apply bg-red-100 dark:bg-red-900/30;
+}
+.event-fc-color.fc-bg-warning:hover,
+.fc .fc-event:hover .event-fc-color.fc-bg-warning {
+  @apply bg-yellow-100 dark:bg-yellow-900/30;
+}
+
+/* Prevent event content overlap: spacing between stacked events */
+.fc .fc-daygrid-event {
+  margin-bottom: 2px;
+}
+
+.fc .fc-daygrid-event .event-fc-color {
+  min-height: 1.75rem;
+  display: flex;
+  align-items: center;
+}
+
+.event-fc-color .fc-event-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.fc.fc-media-screen {
+  @apply min-h-0;
+}
+
+/* No internal scroll: let calendar use full height */
+.fc .fc-scrollgrid-section-body {
+  overflow: visible !important;
+}
+.fc .fc-daygrid-body {
+  overflow: visible !important;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+}
+
+/* Indeterminate bottom-edge loader (file upload slots, etc.) */
+@keyframes inspect-upload-line {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+.animate-inspect-upload-line {
+  animation: inspect-upload-line 1.15s ease-in-out infinite;
+}

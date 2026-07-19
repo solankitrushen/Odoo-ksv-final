@@ -1,0 +1,10 @@
+{
+  "method": "GET",
+  "url": "https://control.msg91.com/api/v5/otp/retry",
+  "headers": {},
+  "query": {
+    "authkey": "<MSG91_AUTH_KEY>",
+    "retrytype": "text",
+    "mobile": "919876543210"
+  }
+}

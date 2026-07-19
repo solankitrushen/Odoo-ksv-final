@@ -1,0 +1,17 @@
+{
+  "id": "order_test_contract_001",
+  "entity": "order",
+  "amount": 16800,
+  "amount_paid": 0,
+  "amount_due": 16800,
+  "currency": "INR",
+  "receipt": "rnt_20260718_0001",
+  "offer_id": null,
+  "status": "created",
+  "attempts": 0,
+  "notes": {
+    "correlation": "rntpay0001",
+    "purpose": "initial_confirmation"
+  },
+  "created_at": 1784367000
+}

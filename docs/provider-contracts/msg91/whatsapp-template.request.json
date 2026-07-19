@@ -1,0 +1,39 @@
+{
+  "method": "POST",
+  "url": "https://control.msg91.com/api/v5/whatsapp/whatsapp-outbound-message/bulk/",
+  "headers": {
+    "accept": "application/json",
+    "authkey": "<MSG91_AUTH_KEY>",
+    "content-type": "application/json"
+  },
+  "body": {
+    "integrated_number": "919900001111",
+    "content_type": "template",
+    "payload": {
+      "type": "template",
+      "template": {
+        "name": "rental_booking_confirmed",
+        "language": {
+          "code": "en",
+          "policy": "deterministic"
+        },
+        "to_and_components": [
+          {
+            "to": ["919876543210"],
+            "components": {
+              "body_1": {
+                "type": "text",
+                "value": "Asha"
+              },
+              "body_2": {
+                "type": "text",
+                "value": "RNT-000123"
+              }
+            }
+          }
+        ]
+      },
+      "messaging_product": "whatsapp"
+    }
+  }
+}

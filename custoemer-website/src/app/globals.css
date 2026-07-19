@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* 60% surface — near-white, warm stone tint, never #fff */
+    --surface: oklch(0.992 0.004 75);
+    --surface-raised: oklch(0.985 0.004 75);
+    --card: oklch(0.998 0.003 75);
+
+    /* 30% ink — near-black, same warm hue, never #000 */
+    --ink: oklch(0.185 0.006 75);
+    --ink-soft: oklch(0.44 0.006 75);
+
+    /* 10% accent — neutral gray structure */
+    --line: oklch(0.9 0.005 75);
+    --line-strong: oklch(0.82 0.005 75);
+    --muted-surface: oklch(0.955 0.004 75);
+
+    /* semantic status — used sparingly, never decorative */
+    --success: oklch(0.62 0.11 155);
+    --warn: oklch(0.75 0.12 75);
+    --danger: oklch(0.58 0.16 27);
+
+    --radius: 0.625rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  ::selection {
+    background: var(--ink);
+    color: var(--surface);
+  }
+
+  /* Money and dates align in columns */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+    text-wrap: balance;
+  }
+
+  /* Focus ring — visible, on-brand */
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Editorial section rhythm */
+  .section {
+    @apply py-20 md:py-28;
+  }
+  .eyebrow {
+    @apply text-2xs font-medium uppercase tracking-[0.18em] text-ink-soft;
+  }
+  /* Hairline grid helpers */
+  .hairline {
+    @apply border-line;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

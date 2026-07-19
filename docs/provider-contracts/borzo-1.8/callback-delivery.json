@@ -1,0 +1,68 @@
+{
+  "event_datetime": "2026-07-18T15:35:00+05:30",
+  "event_type": "delivery_changed",
+  "delivery": {
+    "delivery_id": 11712,
+    "delivery_type": "plain",
+    "order_id": 1250032,
+    "client_id": 180198,
+    "client_order_id": "rntout0001",
+    "address": "Synthetic Customer, Mumbai",
+    "latitude": "19.1000000",
+    "longitude": "72.9000000",
+    "status": "parcel_picked_up",
+    "status_description": "parcel_picked_up",
+    "status_datetime": "2026-07-18T15:34:00+05:30",
+    "created_datetime": "2026-07-18T15:18:39+05:30",
+    "order_name": "50032",
+    "order_payment_amount": "234.50",
+    "delivery_price_amount": "234.50",
+    "point_id": 202686,
+    "contact_person": {
+      "phone": "910000000001",
+      "name": "Synthetic Recipient"
+    },
+    "note": "Synthetic drop-off",
+    "building_number": null,
+    "apartment_number": null,
+    "entrance_number": null,
+    "intercom_code": null,
+    "floor_number": null,
+    "invisible_mile_navigation_instructions": null,
+    "required_start_datetime": "2026-07-20T11:00:00+05:30",
+    "required_finish_datetime": "2026-07-20T12:00:00+05:30",
+    "taking_amount": "0.00",
+    "buyout_amount": "0.00",
+    "is_cod_cash_voucher_required": false,
+    "is_motobox_required": false,
+    "is_thermobox_required": false,
+    "is_return_to_first_point_required": false,
+    "matter": "Rental equipment",
+    "insurance_amount": "25000.00",
+    "weight_kg": 12,
+    "checkin_issue_name": null,
+    "tracking_url": "https://tracking.example.invalid/synthetic-order",
+    "pickup_checkin_code": null,
+    "checkin_code": null,
+    "courier": {
+      "courier_id": 72384,
+      "surname": "Synthetic",
+      "name": "Courier",
+      "middlename": null,
+      "phone": "910000000002",
+      "photo_url": null,
+      "latitude": "19.0500000",
+      "longitude": "72.8500000"
+    },
+    "packages": [
+      {
+        "delivery_package_id": 3632252,
+        "ware_code": "SYN-001",
+        "description": "Sanitized rental equipment",
+        "items_count_units": "pieces",
+        "items_count": 1,
+        "item_payment_amount": "0.00"
+      }
+    ]
+  }
+}

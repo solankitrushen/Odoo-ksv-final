@@ -1,0 +1,80 @@
+# ---------------------------------------------------------------------------
+# VendorBridge monorepo — push application code, documentation, and assets.
+# Everything else at the repo root (agent/kiro/cursor/claude tooling, skills,
+# generated analysis, CI, OS junk, etc.) is ignored.
+# ---------------------------------------------------------------------------
+
+# Ignore everything at the repo root...
+/*
+
+# ...then re-include only what we want to push.
+!/BACKEND/
+!/FRONTEND/
+!/master-admin/
+!/custoemer-website/
+!/README.md
+!/.gitignore
+!/assets/
+!/docs/
+
+# ---------------------------------------------------------------------------
+# Rules below also apply INSIDE BACKEND/ and FRONTEND/.
+# ---------------------------------------------------------------------------
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+.yarn/
+.yarn/install-state.gz
+
+# Env / secrets (keep the *.example files)
+.env
+.env.*
+!*.example
+*.pem
+
+# Build / output (any depth)
+.next/
+out/
+dist/
+build/
+.expo/
+web-build/
+.turbo/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# Caches
+.cache/
+.parcel-cache/
+.eslintcache
+.npm/
+
+# Coverage / tests
+coverage/
+.nyc_output/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime uploads (backend) — keep the folder, ignore contents
+BACKEND/public/menu/*
+!BACKEND/public/menu/.gitkeep
+
+# Auth tooling that may hold secrets
+.clerk/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+.cursor/

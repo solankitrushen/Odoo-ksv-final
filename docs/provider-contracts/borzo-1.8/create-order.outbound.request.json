@@ -1,0 +1,60 @@
+{
+  "type": "standard",
+  "matter": "Rental equipment",
+  "vehicle_type_id": 8,
+  "total_weight_kg": 12,
+  "insurance_amount": "25000.00",
+  "is_client_notification_enabled": false,
+  "is_contact_person_notification_enabled": false,
+  "is_route_optimizer_enabled": false,
+  "loaders_count": 0,
+  "is_motobox_required": false,
+  "is_thermobox_required": false,
+  "payment_method": "balance",
+  "points": [
+    {
+      "address": "Synthetic Warehouse, Mumbai",
+      "contact_person": {
+        "phone": "910000000000",
+        "name": "Synthetic Dispatch"
+      },
+      "latitude": "19.0000000",
+      "longitude": "72.8000000",
+      "required_start_datetime": "2026-07-20T10:00:00+05:30",
+      "required_finish_datetime": "2026-07-20T10:30:00+05:30",
+      "taking_amount": "0.00",
+      "buyout_amount": "0.00",
+      "note": "Synthetic pickup",
+      "is_order_payment_here": false,
+      "is_cod_cash_voucher_required": false,
+      "packages": []
+    },
+    {
+      "address": "Synthetic Customer, Mumbai",
+      "contact_person": {
+        "phone": "910000000001",
+        "name": "Synthetic Recipient"
+      },
+      "client_order_id": "rntout0001",
+      "latitude": "19.1000000",
+      "longitude": "72.9000000",
+      "required_start_datetime": "2026-07-20T11:00:00+05:30",
+      "required_finish_datetime": "2026-07-20T12:00:00+05:30",
+      "taking_amount": "0.00",
+      "buyout_amount": "0.00",
+      "note": "Synthetic drop-off",
+      "is_order_payment_here": false,
+      "is_cod_cash_voucher_required": false,
+      "packages": [
+        {
+          "ware_code": "SYN-001",
+          "description": "Sanitized rental equipment",
+          "items_count": 1,
+          "item_payment_amount": "0.00",
+          "nomenclature_code": "SYNTHETIC"
+        }
+      ]
+    }
+  ],
+  "is_return_required": false
+}

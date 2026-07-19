@@ -1,0 +1,37 @@
+{
+  "smsFlow": {
+    "headerNames": ["accept", "authkey", "content-type"],
+    "authLocation": "header",
+    "authField": "authkey",
+    "authValue": "<MSG91_AUTH_KEY>",
+    "accept": "application/json",
+    "contentType": "application/json"
+  },
+  "whatsAppTransactionalTemplate": {
+    "headerNames": ["accept", "authkey", "content-type"],
+    "authLocation": "header",
+    "authField": "authkey",
+    "authValue": "<MSG91_AUTH_KEY>",
+    "accept": "application/json",
+    "contentType": "application/json"
+  },
+  "otpSend": {
+    "headerNames": ["content-type"],
+    "authLocation": "query",
+    "authField": "authkey",
+    "authValue": "<MSG91_AUTH_KEY>",
+    "contentType": "application/json"
+  },
+  "otpVerify": {
+    "headerNames": ["authkey"],
+    "authLocation": "header",
+    "authField": "authkey",
+    "authValue": "<MSG91_AUTH_KEY>"
+  },
+  "otpResend": {
+    "headerNames": [],
+    "authLocation": "query",
+    "authField": "authkey",
+    "authValue": "<MSG91_AUTH_KEY>"
+  }
+}

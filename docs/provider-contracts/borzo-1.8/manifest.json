@@ -1,0 +1,632 @@
+{
+  "manifestVersion": 1,
+  "provider": "borzo",
+  "contractVersion": "business-api-1.8",
+  "status": "draft-pending-audit",
+  "retrievedAt": "2026-07-18",
+  "retrievalMethod": "HTTPS GET of official rendered documentation via documentation extractor; no live provider API/account call",
+  "baseUrls": {
+    "test": "https://robotapitest-in.borzodelivery.com/api/business/1.8",
+    "production": "https://robot-in.borzodelivery.com/api/business/1.8"
+  },
+  "hashAlgorithm": "sha256",
+  "manifestSelfHashPolicy": "manifest.json is the root of trust and is excluded from its own artifact list to avoid a recursive digest; release evidence records its SHA-256 separately",
+  "encoding": {
+    "requestResponse": "JSON UTF-8",
+    "fixtureFiles": "UTF-8, two-space indentation, final LF",
+    "money": "two-decimal rupee JSON strings parsed exactly to integer paise",
+    "timestamp": "ISO 8601 with explicit timezone offset as documented"
+  },
+  "auth": {
+    "header": "X-DV-Auth-Token",
+    "location": "header",
+    "encoding": "opaque string",
+    "secretInQueryOrBody": false
+  },
+  "signatureEncoding": {
+    "algorithm": "HMAC-SHA256",
+    "message": "exact raw callback request bytes",
+    "messageEncoding": "raw bytes without parse/re-serialization",
+    "digestEncoding": "lowercase hexadecimal",
+    "header": "X-DV-Signature"
+  },
+  "schemaPolicy": {
+    "version": 1,
+    "success": {
+      "httpStatus": 200,
+      "required": {
+        "is_successful": true
+      }
+    },
+    "error": {
+      "httpStatus": 400,
+      "required": {
+        "is_successful": false,
+        "errors": "array",
+        "parameter_errors": "object|null"
+      }
+    },
+    "mode": "operation-specific allowlisted fields; unknown success shape fails closed"
+  },
+  "runtimePolicy": {
+    "outboundAndReturnLegs": "independent provider orders with reversed authoritative points and is_return_required=false",
+    "isReturnRequiredFixture": "documented provider coverage only; does not authorize combining rental legs",
+    "quoteTtl": "local five minutes",
+    "preCreate": "fresh calculate-order required; changed amount, warnings, or payload hash blocks create"
+  },
+  "sanitization": {
+    "secrets": "Production token and callback secret replaced; vectors use explicit test-only secret.",
+    "identifiersAndPii": "All names, addresses, phones, IDs, coordinates, URLs and timestamps are synthetic.",
+    "liveTraffic": false
+  },
+  "sourceDocuments": [
+    {
+      "name": "Borzo Business API 1.8 overview and authentication",
+      "url": "https://borzodelivery.com/in/business-api/doc#overview",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Order price calculation",
+      "url": "https://borzodelivery.com/in/business-api/doc#calculate-order",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Placing an order",
+      "url": "https://borzodelivery.com/in/business-api/doc#create-order",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Canceling an order",
+      "url": "https://borzodelivery.com/in/business-api/doc#cancel-order",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "List of orders",
+      "url": "https://borzodelivery.com/in/business-api/doc#orders",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Courier info and location",
+      "url": "https://borzodelivery.com/in/business-api/doc#courier",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Order callback",
+      "url": "https://borzodelivery.com/in/business-api/doc#order-callback",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Delivery callback",
+      "url": "https://borzodelivery.com/in/business-api/doc#delivery-callback",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Errors",
+      "url": "https://borzodelivery.com/in/business-api/doc#errors",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    },
+    {
+      "name": "Version 1.8 changelog",
+      "url": "https://borzodelivery.com/in/business-api/doc#changelog",
+      "retrievedAt": "2026-07-18",
+      "method": "HTTPS GET rendered official documentation"
+    }
+  ],
+  "operations": {
+    "calculateOrder": {
+      "apiVersion": "1.8",
+      "method": "POST",
+      "path": "/calculate-order",
+      "auth": "X-DV-Auth-Token header",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#calculate-order",
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "matter",
+          "points"
+        ],
+        "points": "ordered pickup then drop-off"
+      },
+      "successSchema": {
+        "required": [
+          "is_successful",
+          "order.payment_amount",
+          "warnings",
+          "parameter_warnings"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "is_successful",
+          "errors",
+          "parameter_errors"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "calculate-order.outbound.request.json",
+          "kind": "request",
+          "sha256": "d4f402c4761389183cac1c36be349c8c40be22c3b6a26f9eff5b9ae5399023f6"
+        },
+        {
+          "path": "calculate-order.return.request.json",
+          "kind": "request",
+          "sha256": "e98a75a0f23d0a8f1b0b89bbccd7b0bc76cfa7aec0a28ac697827f41eef33bd7"
+        },
+        {
+          "path": "calculate-order.success.json",
+          "kind": "success",
+          "sha256": "3feb9322cd6e574c5020fa92a0f5910e1ad22c5cd93df4d137fc220c35a79f0c"
+        },
+        {
+          "path": "calculate-order.changed.success.json",
+          "kind": "success",
+          "sha256": "9d88edb64c07f3a07de44debf922ad8c0a04aae868088e3f2044045cf787bb94"
+        },
+        {
+          "path": "calculate-order.error.json",
+          "kind": "error",
+          "sha256": "429851c27c92e2b28e9a40771b3b6894e2ab74dc2a908311daafb86d4579fd63"
+        },
+        {
+          "path": "quote-change.example.json",
+          "kind": "decision-example",
+          "sha256": "f38d79b3cb9e991480d6b50476e196279ba526bb7c2b16fd01c81a9433227af0"
+        },
+        {
+          "path": "error.requests-limit-exceeded.json",
+          "kind": "error",
+          "sha256": "a0446efa143e46e74651b0af81f1d90690f90d15138312532925c6627375d892"
+        },
+        {
+          "path": "error.service-unavailable.json",
+          "kind": "error",
+          "sha256": "b5b341bb660433b4e448e9beb96b8e61c716ae0fe4ecaf10b4dbaead2dfadbf1"
+        }
+      ]
+    },
+    "createOrder": {
+      "apiVersion": "1.8",
+      "method": "POST",
+      "path": "/create-order",
+      "auth": "X-DV-Auth-Token header",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#create-order",
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "matter",
+          "points"
+        ],
+        "pointsMin": 2,
+        "is_return_required": "boolean default false",
+        "client_order_idMaxLength": 32
+      },
+      "successSchema": {
+        "required": [
+          "is_successful",
+          "order.order_id",
+          "order.status",
+          "order.points",
+          "order.payment_amount",
+          "order.is_return_required"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "is_successful",
+          "errors",
+          "parameter_errors"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "create-order.outbound.request.json",
+          "kind": "request",
+          "sha256": "bafaf9dd8823cd8b1a52671b9e0a0f4d51fb3d2de7841ec5eecf86e6cac3d6bc"
+        },
+        {
+          "path": "create-order.return-leg.request.json",
+          "kind": "request",
+          "sha256": "1257e31b8a4332d25fb9e2ed8dfb4edf1feef6f8c5e94ea2a5165c3fc6823f40"
+        },
+        {
+          "path": "create-order.return-required.request.json",
+          "kind": "request",
+          "sha256": "e7319fb06ba83ceaee150ce43c2ac5c1625a4911913e1344f0fa854021087138"
+        },
+        {
+          "path": "create-order.success.json",
+          "kind": "success",
+          "sha256": "2e6fb5bbe369c64dea5a391ced960acfe4a491644775cafb4666a1de617c7954"
+        },
+        {
+          "path": "create-order.return-required.success.json",
+          "kind": "success",
+          "sha256": "603be2301ab2fb3f5e32c9532c04f6438650970510ed9b2660dfaef2ba5832f8"
+        },
+        {
+          "path": "create-order.error.json",
+          "kind": "error",
+          "sha256": "a260a09a3d66c4c89a6092a3bd0ef0af3224c8750245c3de9f75c899d817eb20"
+        },
+        {
+          "path": "error.requests-limit-exceeded.json",
+          "kind": "error",
+          "sha256": "a0446efa143e46e74651b0af81f1d90690f90d15138312532925c6627375d892"
+        },
+        {
+          "path": "error.service-unavailable.json",
+          "kind": "error",
+          "sha256": "b5b341bb660433b4e448e9beb96b8e61c716ae0fe4ecaf10b4dbaead2dfadbf1"
+        }
+      ]
+    },
+    "cancelOrder": {
+      "apiVersion": "1.8",
+      "method": "POST",
+      "path": "/cancel-order",
+      "auth": "X-DV-Auth-Token header",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#cancel-order",
+      "requestSchema": {
+        "required": [
+          "order_id"
+        ]
+      },
+      "successSchema": {
+        "required": [
+          "is_successful",
+          "order.order_id",
+          "order.status"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "is_successful",
+          "errors",
+          "parameter_errors"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "cancel-order.request.json",
+          "kind": "request",
+          "sha256": "03d1add84dbcd33ccab46e85e724511342d54ebf5a90d2f7b5824d80bc433168"
+        },
+        {
+          "path": "cancel-order.success.json",
+          "kind": "success",
+          "sha256": "819aa91bd4605bc450fba4406d8b903672786ed7bb280304936a57665b991acd"
+        },
+        {
+          "path": "cancel-order.error.json",
+          "kind": "error",
+          "sha256": "4a8d3ebe907147fda222385eb881896d1af68803b4f7fefefcbd8c59952e2122"
+        },
+        {
+          "path": "error.service-unavailable.json",
+          "kind": "error",
+          "sha256": "b5b341bb660433b4e448e9beb96b8e61c716ae0fe4ecaf10b4dbaead2dfadbf1"
+        }
+      ]
+    },
+    "orders": {
+      "apiVersion": "1.8",
+      "method": "GET",
+      "path": "/orders",
+      "auth": "X-DV-Auth-Token header",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#orders",
+      "requestSchema": {
+        "query": [
+          "order_id",
+          "status",
+          "offset",
+          "count"
+        ],
+        "countMax": 50
+      },
+      "successSchema": {
+        "required": [
+          "is_successful",
+          "orders",
+          "orders_count"
+        ]
+      },
+      "errorSchema": {
+        "required": [
+          "is_successful",
+          "errors",
+          "parameter_errors"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "orders.request.json",
+          "kind": "request",
+          "sha256": "1612972f51ff8a1c0296c4f71b43c912ee74afc815f6717ac9e1fc81edca36bb"
+        },
+        {
+          "path": "orders.success.json",
+          "kind": "success",
+          "sha256": "3045269e6ab3fdcae634ec33eee511de5420bfd0a6df33fe6f03607a0c8383d3"
+        },
+        {
+          "path": "orders.error.json",
+          "kind": "error",
+          "sha256": "5e8c8a04308782dde97935e5986a76eaff1ce19994689acc09a83d39a256b1e2"
+        },
+        {
+          "path": "error.requests-limit-exceeded.json",
+          "kind": "error",
+          "sha256": "a0446efa143e46e74651b0af81f1d90690f90d15138312532925c6627375d892"
+        }
+      ]
+    },
+    "courier": {
+      "apiVersion": "1.8",
+      "method": "GET",
+      "path": "/courier",
+      "auth": "X-DV-Auth-Token header",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#courier",
+      "requestSchema": {
+        "queryRequired": [
+          "order_id"
+        ]
+      },
+      "successSchema": {
+        "required": [
+          "is_successful",
+          "courier"
+        ],
+        "courier": "object|null"
+      },
+      "errorSchema": {
+        "required": [
+          "is_successful",
+          "errors",
+          "parameter_errors"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "courier.request.json",
+          "kind": "request",
+          "sha256": "6cd0b04a4527376445cdfe1c86ac370aa222bb2384b2f137f1352a21a88ca741"
+        },
+        {
+          "path": "courier.success.json",
+          "kind": "success",
+          "sha256": "a46b87462932f4a454581225013974b5c2303f443e2406ec5906d89ec50334c0"
+        },
+        {
+          "path": "courier.error.json",
+          "kind": "error",
+          "sha256": "5e8c8a04308782dde97935e5986a76eaff1ce19994689acc09a83d39a256b1e2"
+        },
+        {
+          "path": "error.requests-limit-exceeded.json",
+          "kind": "error",
+          "sha256": "a0446efa143e46e74651b0af81f1d90690f90d15138312532925c6627375d892"
+        }
+      ]
+    },
+    "orderCallback": {
+      "apiVersion": "1.8",
+      "method": "POST",
+      "path": "<configured-order-callback-url>",
+      "auth": "X-DV-Signature raw-body HMAC",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#order-callback",
+      "schema": {
+        "required": [
+          "event_datetime",
+          "event_type",
+          "order"
+        ],
+        "eventTypes": [
+          "order_created",
+          "order_changed"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "callback-order.json",
+          "kind": "webhook",
+          "sha256": "4419424044d2733395e3b762c665eae03f14f737b999bc151b60802945806e65"
+        },
+        {
+          "path": "callback-signature-vectors.json",
+          "kind": "signature-vectors",
+          "sha256": "59193fbeaecdb58f52768f6817cba1764189996ae53f5ba4f9c462a1f729b2f5"
+        }
+      ]
+    },
+    "deliveryCallback": {
+      "apiVersion": "1.8",
+      "method": "POST",
+      "path": "<configured-delivery-callback-url>",
+      "auth": "X-DV-Signature raw-body HMAC",
+      "officialSourceUrl": "https://borzodelivery.com/in/business-api/doc#delivery-callback",
+      "schema": {
+        "required": [
+          "event_datetime",
+          "event_type",
+          "delivery"
+        ],
+        "eventTypes": [
+          "delivery_created",
+          "delivery_changed"
+        ]
+      },
+      "fixtures": [
+        {
+          "path": "callback-delivery.json",
+          "kind": "webhook",
+          "sha256": "f0b8df8485a00f4e87c208e4284ebf9fdb6e0a40d294a5945285d480dfc4fbbb"
+        },
+        {
+          "path": "callback-signature-vectors.json",
+          "kind": "signature-vectors",
+          "sha256": "59193fbeaecdb58f52768f6817cba1764189996ae53f5ba4f9c462a1f729b2f5"
+        }
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "kind": "readme",
+      "sha256": "7c9b64504297afd791b5fa0cf589c416ea93ae8d7312218d18d755d39b0090ff"
+    },
+    {
+      "path": "auth-context.json",
+      "kind": "auth",
+      "sha256": "a436ab1ba9c4223a9289a7deae7cbc97777df0cd37b6846b4ba8a4c3464280fa"
+    },
+    {
+      "path": "calculate-order.changed.success.json",
+      "kind": "success",
+      "sha256": "9d88edb64c07f3a07de44debf922ad8c0a04aae868088e3f2044045cf787bb94"
+    },
+    {
+      "path": "calculate-order.error.json",
+      "kind": "error",
+      "sha256": "429851c27c92e2b28e9a40771b3b6894e2ab74dc2a908311daafb86d4579fd63"
+    },
+    {
+      "path": "calculate-order.outbound.request.json",
+      "kind": "request",
+      "sha256": "d4f402c4761389183cac1c36be349c8c40be22c3b6a26f9eff5b9ae5399023f6"
+    },
+    {
+      "path": "calculate-order.return.request.json",
+      "kind": "request",
+      "sha256": "e98a75a0f23d0a8f1b0b89bbccd7b0bc76cfa7aec0a28ac697827f41eef33bd7"
+    },
+    {
+      "path": "calculate-order.success.json",
+      "kind": "success",
+      "sha256": "3feb9322cd6e574c5020fa92a0f5910e1ad22c5cd93df4d137fc220c35a79f0c"
+    },
+    {
+      "path": "callback-delivery.json",
+      "kind": "webhook",
+      "sha256": "f0b8df8485a00f4e87c208e4284ebf9fdb6e0a40d294a5945285d480dfc4fbbb"
+    },
+    {
+      "path": "callback-order.json",
+      "kind": "webhook",
+      "sha256": "4419424044d2733395e3b762c665eae03f14f737b999bc151b60802945806e65"
+    },
+    {
+      "path": "callback-signature-vectors.json",
+      "kind": "signature-vectors",
+      "sha256": "59193fbeaecdb58f52768f6817cba1764189996ae53f5ba4f9c462a1f729b2f5"
+    },
+    {
+      "path": "cancel-order.error.json",
+      "kind": "error",
+      "sha256": "4a8d3ebe907147fda222385eb881896d1af68803b4f7fefefcbd8c59952e2122"
+    },
+    {
+      "path": "cancel-order.request.json",
+      "kind": "request",
+      "sha256": "03d1add84dbcd33ccab46e85e724511342d54ebf5a90d2f7b5824d80bc433168"
+    },
+    {
+      "path": "cancel-order.success.json",
+      "kind": "success",
+      "sha256": "819aa91bd4605bc450fba4406d8b903672786ed7bb280304936a57665b991acd"
+    },
+    {
+      "path": "courier.error.json",
+      "kind": "error",
+      "sha256": "5e8c8a04308782dde97935e5986a76eaff1ce19994689acc09a83d39a256b1e2"
+    },
+    {
+      "path": "courier.request.json",
+      "kind": "request",
+      "sha256": "6cd0b04a4527376445cdfe1c86ac370aa222bb2384b2f137f1352a21a88ca741"
+    },
+    {
+      "path": "courier.success.json",
+      "kind": "success",
+      "sha256": "a46b87462932f4a454581225013974b5c2303f443e2406ec5906d89ec50334c0"
+    },
+    {
+      "path": "create-order.error.json",
+      "kind": "error",
+      "sha256": "a260a09a3d66c4c89a6092a3bd0ef0af3224c8750245c3de9f75c899d817eb20"
+    },
+    {
+      "path": "create-order.outbound.request.json",
+      "kind": "request",
+      "sha256": "bafaf9dd8823cd8b1a52671b9e0a0f4d51fb3d2de7841ec5eecf86e6cac3d6bc"
+    },
+    {
+      "path": "create-order.return-leg.request.json",
+      "kind": "request",
+      "sha256": "1257e31b8a4332d25fb9e2ed8dfb4edf1feef6f8c5e94ea2a5165c3fc6823f40"
+    },
+    {
+      "path": "create-order.return-required.request.json",
+      "kind": "request",
+      "sha256": "e7319fb06ba83ceaee150ce43c2ac5c1625a4911913e1344f0fa854021087138"
+    },
+    {
+      "path": "create-order.return-required.success.json",
+      "kind": "success",
+      "sha256": "603be2301ab2fb3f5e32c9532c04f6438650970510ed9b2660dfaef2ba5832f8"
+    },
+    {
+      "path": "create-order.success.json",
+      "kind": "success",
+      "sha256": "2e6fb5bbe369c64dea5a391ced960acfe4a491644775cafb4666a1de617c7954"
+    },
+    {
+      "path": "error.requests-limit-exceeded.json",
+      "kind": "error",
+      "sha256": "a0446efa143e46e74651b0af81f1d90690f90d15138312532925c6627375d892"
+    },
+    {
+      "path": "error.service-unavailable.json",
+      "kind": "error",
+      "sha256": "b5b341bb660433b4e448e9beb96b8e61c716ae0fe4ecaf10b4dbaead2dfadbf1"
+    },
+    {
+      "path": "orders.error.json",
+      "kind": "error",
+      "sha256": "5e8c8a04308782dde97935e5986a76eaff1ce19994689acc09a83d39a256b1e2"
+    },
+    {
+      "path": "orders.request.json",
+      "kind": "request",
+      "sha256": "1612972f51ff8a1c0296c4f71b43c912ee74afc815f6717ac9e1fc81edca36bb"
+    },
+    {
+      "path": "orders.success.json",
+      "kind": "success",
+      "sha256": "3045269e6ab3fdcae634ec33eee511de5420bfd0a6df33fe6f03607a0c8383d3"
+    },
+    {
+      "path": "quote-change.example.json",
+      "kind": "decision-example",
+      "sha256": "f38d79b3cb9e991480d6b50476e196279ba526bb7c2b16fd01c81a9433227af0"
+    }
+  ],
+  "validation": {
+    "requiredOperationCount": 7,
+    "hashedArtifactCount": 28,
+    "jsonValidatedAt": "2026-07-18",
+    "hashesValidatedAt": "2026-07-18",
+    "signatureVectorsValidatedAt": "2026-07-18",
+    "officialLinksRetrievedAt": "2026-07-18"
+  }
+}

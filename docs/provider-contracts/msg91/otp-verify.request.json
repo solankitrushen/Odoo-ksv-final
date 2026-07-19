@@ -1,0 +1,11 @@
+{
+  "method": "GET",
+  "url": "https://control.msg91.com/api/v5/otp/verify",
+  "headers": {
+    "authkey": "<MSG91_AUTH_KEY>"
+  },
+  "query": {
+    "otp": "123456",
+    "mobile": "919876543210"
+  }
+}

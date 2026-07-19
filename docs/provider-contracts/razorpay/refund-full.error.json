@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "BAD_REQUEST_ERROR",
+    "description": "The payment has been fully refunded already.",
+    "source": "business",
+    "step": "refund_initiation",
+    "reason": "payment_fully_refunded",
+    "metadata": {
+      "payment_id": "pay_test_contract_001"
+    }
+  }
+}

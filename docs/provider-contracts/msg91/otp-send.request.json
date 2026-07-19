@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "url": "https://control.msg91.com/api/v5/otp",
+  "headers": {
+    "content-type": "application/json"
+  },
+  "query": {
+    "template_id": "<MSG91_OTP_TEMPLATE_ID>",
+    "mobile": "919876543210",
+    "authkey": "<MSG91_AUTH_KEY>"
+  }
+}

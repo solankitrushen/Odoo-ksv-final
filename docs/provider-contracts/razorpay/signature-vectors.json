@@ -1,0 +1,44 @@
+{
+  "algorithm": "HMAC-SHA256",
+  "messageEncoding": "exact file bytes including final LF",
+  "signatureEncoding": "lowercase hexadecimal",
+  "header": "X-Razorpay-Signature",
+  "testSecret": "test_webhook_secret_not_for_production_2026",
+  "vectors": [
+    {
+      "path": "webhook-order.paid.json",
+      "bodySha256": "a748bdb6791c8c4f018e26ffdc4391dc4f20c2efb4433d8b2e558a736a3ce1b7",
+      "expectedSignature": "d2328ce75fd4463c73b00f0c32e24928441026cf33f348b5a172519ff208e7e2"
+    },
+    {
+      "path": "webhook-payment.authorized.json",
+      "bodySha256": "f919191ead3dc451cac3b518ba623c277ea015ca2c9285edec95d1862a060388",
+      "expectedSignature": "823990db22b577813f61c0a0c0607f32a7b5463ae1f2583414193641d390fd60"
+    },
+    {
+      "path": "webhook-payment.captured.json",
+      "bodySha256": "0e9c8f674a3a5145891a1c9f437f7c57cff12b51ee9768d7f548e4ef635f8533",
+      "expectedSignature": "94ef8112b36f995c878111344e1e6b02d5f6135c456e638865dc4147177dae1a"
+    },
+    {
+      "path": "webhook-payment.failed.json",
+      "bodySha256": "221dc4e788481d902980870c568d68f3cf05fb63a4cab737469b673f97721b0c",
+      "expectedSignature": "dedd8d1584ed6c7cf5817fe862717c881869919a97698c15d988d8c512565102"
+    },
+    {
+      "path": "webhook-refund.created.json",
+      "bodySha256": "c86758f5d829dd5f60cf08b8c91a7a5783dc9518b5497b03faacf0654b218be5",
+      "expectedSignature": "81c92f6b654860bd6a40e492add7a52e799de2d70ed939572e2def829f7491f4"
+    },
+    {
+      "path": "webhook-refund.failed.json",
+      "bodySha256": "b9b42dc3578c7261571af8338190cb83d29329ccdf5814fafc97226e5d7b6256",
+      "expectedSignature": "5e0296dc6ed4f066831f0251a64f8fb81b85e91e83a94fca66e393c0909db1ad"
+    },
+    {
+      "path": "webhook-refund.processed.json",
+      "bodySha256": "5d5e73561aad15a62cf6b1e1a5066959921179bb06298edd4a2e7c8fa1351d29",
+      "expectedSignature": "d34659586389e0e6f43c570f81224e530a511a6cb7c3a250bf058d9cc4077ad6"
+    }
+  ]
+}

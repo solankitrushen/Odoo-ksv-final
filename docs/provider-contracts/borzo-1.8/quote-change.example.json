@@ -1,0 +1,41 @@
+{
+  "canonicalRequestPath": "create-order.outbound.request.json",
+  "payloadHash": "202b3e8ff9e376925ba2e3841d62739a89e1d39271ddb31c58cdfaa75cb57d41",
+  "acceptedQuote": {
+    "responsePath": "calculate-order.success.json",
+    "amountPaise": 23450,
+    "warnings": [],
+    "expired": false
+  },
+  "freshUnchanged": {
+    "payloadHash": "202b3e8ff9e376925ba2e3841d62739a89e1d39271ddb31c58cdfaa75cb57d41",
+    "amountPaise": 23450,
+    "warnings": [],
+    "decision": "create-order"
+  },
+  "freshAmountChanged": {
+    "responsePath": "calculate-order.changed.success.json",
+    "payloadHash": "202b3e8ff9e376925ba2e3841d62739a89e1d39271ddb31c58cdfaa75cb57d41",
+    "amountPaise": 24900,
+    "warnings": [],
+    "decision": "DELIVERY_QUOTE_CHANGED"
+  },
+  "freshWarningsChanged": {
+    "payloadHash": "202b3e8ff9e376925ba2e3841d62739a89e1d39271ddb31c58cdfaa75cb57d41",
+    "amountPaise": 23450,
+    "warnings": [
+      "invalid_parameters"
+    ],
+    "decision": "DELIVERY_QUOTE_CHANGED"
+  },
+  "freshPayloadChanged": {
+    "payloadHash": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+    "amountPaise": 23450,
+    "warnings": [],
+    "decision": "DELIVERY_QUOTE_CHANGED"
+  },
+  "expired": {
+    "decision": "DELIVERY_QUOTE_EXPIRED",
+    "providerCalls": 0
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "method": "GET",
+  "path": "/v1/payments/pay_test_contract_001",
+  "headers": {
+    "accept": "application/json",
+    "authorization": "Basic <base64(key_id:key_secret)>"
+  }
+}

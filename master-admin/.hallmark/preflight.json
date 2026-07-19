@@ -1,0 +1,10 @@
+{
+  "date": "2026-07-19",
+  "framework": "Next.js 15 App Router",
+  "palette": "HSL CSS vars in src/app/globals.css (shadcn light/dark)",
+  "fonts": "system / default stack (no next/font brand face locked)",
+  "motion": "framer-motion installed; product stance = motion-cut for ops UI",
+  "spacing": "Tailwind default + --radius",
+  "preserve": ["globals.css tokens", "shadcn/ui", "dashboard shell", "rentalGet"],
+  "scope": "hard-reset admin; dashboard only today"
+}

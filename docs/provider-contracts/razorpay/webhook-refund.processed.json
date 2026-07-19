@@ -1,0 +1,70 @@
+{
+  "entity": "event",
+  "account_id": "acc_test_contract",
+  "event": "refund.processed",
+  "contains": [
+    "refund",
+    "payment"
+  ],
+  "payload": {
+    "refund": {
+      "entity": {
+        "id": "rfnd_test_partial_001",
+        "entity": "refund",
+        "amount": 4000,
+        "currency": "INR",
+        "payment_id": "pay_test_contract_001",
+        "notes": {
+          "correlation": "rntrfnd0001"
+        },
+        "receipt": "rntrfnd_20260718_0001",
+        "acquirer_data": {
+          "arn": "synthetic-arn-001"
+        },
+        "created_at": 1784368000,
+        "batch_id": null,
+        "status": "processed",
+        "speed_processed": "normal",
+        "speed_requested": "normal"
+      }
+    },
+    "payment": {
+      "entity": {
+        "id": "pay_test_contract_001",
+        "entity": "payment",
+        "amount": 16800,
+        "currency": "INR",
+        "status": "captured",
+        "order_id": "order_test_contract_001",
+        "invoice_id": null,
+        "international": false,
+        "method": "netbanking",
+        "amount_refunded": 4000,
+        "refund_status": "partial",
+        "captured": true,
+        "description": "Rental payment",
+        "card_id": null,
+        "bank": "ICIC",
+        "wallet": null,
+        "vpa": null,
+        "email": "customer@example.invalid",
+        "contact": "+910000000000",
+        "notes": {
+          "correlation": "rntpay0001"
+        },
+        "fee": 400,
+        "tax": 61,
+        "error_code": null,
+        "error_description": null,
+        "error_source": null,
+        "error_step": null,
+        "error_reason": null,
+        "acquirer_data": {
+          "bank_transaction_id": "synthetic-bank-ref-001"
+        },
+        "created_at": 1784367060
+      }
+    }
+  },
+  "created_at": 1784368005
+}

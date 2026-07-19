@@ -1,0 +1,9 @@
+{
+  "amount": 16800,
+  "currency": "INR",
+  "receipt": "rnt_20260718_0001",
+  "notes": {
+    "correlation": "rntpay0001",
+    "purpose": "initial_confirmation"
+  }
+}

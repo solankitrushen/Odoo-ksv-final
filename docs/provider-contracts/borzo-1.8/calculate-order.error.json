@@ -1,0 +1,18 @@
+{
+  "is_successful": false,
+  "errors": [
+    "invalid_parameters"
+  ],
+  "parameter_errors": {
+    "points": [
+      null,
+      {
+        "contact_person": {
+          "phone": [
+            "required"
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "error": {
+    "code": "BAD_REQUEST_ERROR",
+    "description": "The refund amount provided is greater than amount captured.",
+    "source": "business",
+    "step": "refund_initiation",
+    "reason": "refund_amount_exceeds_captured",
+    "metadata": {
+      "payment_id": "pay_test_contract_001"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "id": "rfnd_test_partial_001",
+  "entity": "refund",
+  "amount": 4000,
+  "currency": "INR",
+  "payment_id": "pay_test_contract_001",
+  "notes": {
+    "correlation": "rntrfnd0001",
+    "bucket": "mixed"
+  },
+  "receipt": "rntrfnd_20260718_0001",
+  "acquirer_data": {
+    "arn": null
+  },
+  "created_at": 1784368000,
+  "batch_id": null,
+  "status": "pending",
+  "speed_processed": "normal",
+  "speed_requested": "normal"
+}

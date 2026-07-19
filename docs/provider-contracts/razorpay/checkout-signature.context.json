@@ -1,0 +1,19 @@
+{
+  "serverStoredOrderId": "order_test_contract_001",
+  "receivedOrderId": "order_test_contract_001",
+  "paymentId": "pay_test_contract_001",
+  "message": "order_test_contract_001|pay_test_contract_001",
+  "algorithm": "HMAC-SHA256",
+  "messageEncoding": "UTF-8",
+  "signatureEncoding": "lowercase hexadecimal",
+  "testSecret": "test_key_secret_not_for_production_2026",
+  "expectedSignature": "3dd79f2454ffc1fef276d2c55594c0153ecf4063b8c0bdba51c5571b04ca14ab",
+  "validationAfterSignature": {
+    "id": "pay_test_contract_001",
+    "order_id": "order_test_contract_001",
+    "amount": 16800,
+    "currency": "INR",
+    "status": "captured",
+    "captured": true
+  }
+}

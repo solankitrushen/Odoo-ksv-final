@@ -1,0 +1,10 @@
+{
+  "method": "GET",
+  "path": "/courier",
+  "query": {
+    "order_id": 1250032
+  },
+  "headers": {
+    "X-DV-Auth-Token": "<BORZO_AUTH_TOKEN>"
+  }
+}

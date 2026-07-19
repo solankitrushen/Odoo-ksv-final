@@ -1,0 +1,14 @@
+{
+  "api": {
+    "header": "X-DV-Auth-Token",
+    "value": "<BORZO_AUTH_TOKEN>",
+    "encoding": "opaque header string; never query/body"
+  },
+  "callback": {
+    "header": "X-DV-Signature",
+    "algorithm": "HMAC-SHA256",
+    "messageEncoding": "exact raw HTTP request bytes",
+    "digestEncoding": "lowercase hexadecimal",
+    "testSecret": "test_borzo_callback_secret_not_for_production_2026"
+  }
+}

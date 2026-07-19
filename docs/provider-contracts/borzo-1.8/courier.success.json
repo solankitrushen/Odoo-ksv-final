@@ -1,0 +1,13 @@
+{
+  "is_successful": true,
+  "courier": {
+    "courier_id": 72384,
+    "surname": "Synthetic",
+    "name": "Courier",
+    "middlename": null,
+    "phone": "910000000002",
+    "photo_url": null,
+    "latitude": "19.0500000",
+    "longitude": "72.8500000"
+  }
+}
